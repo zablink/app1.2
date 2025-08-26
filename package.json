@@ -1,12 +1,13 @@
 {
-  "name": "app1.2",
+  "name": "rrrp-app",
   "private": true,
   "type": "module",
   "scripts": {
     "build": "react-router build",
     "dev": "react-router dev",
     "start": "react-router-serve ./build/server/index.js",
-    "typecheck": "react-router typegen && tsc"
+    "typecheck": "react-router typegen && tsc",
+    "lint": "eslint . --ext ts,tsx,js,jsx --max-warnings 0"
   },
   "dependencies": {
     "@react-router/node": "^7.7.1",
@@ -14,7 +15,14 @@
     "isbot": "^5.1.27",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-router": "^7.7.1"
+    "react-router": "^7.7.1",
+    "@supabase/supabase-js": "^2.45.0",
+    "zod": "^3.23.8",
+    "lucide-react": "^0.441.0",
+    "framer-motion": "^11.3.24",
+    "recharts": "^2.12.7",
+    "clsx": "^2.1.1",
+    "tailwind-variants": "^0.2.1"
   },
   "devDependencies": {
     "@react-router/dev": "^7.7.1",
@@ -25,6 +33,11 @@
     "tailwindcss": "^4.1.4",
     "typescript": "^5.8.3",
     "vite": "^6.3.3",
-    "vite-tsconfig-paths": "^5.1.4"
+    "vite-tsconfig-paths": "^5.1.4",
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.38",
+    "eslint": "^9.10.0",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0"
   }
 }

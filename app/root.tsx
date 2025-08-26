@@ -1,75 +1,52 @@
-import {
-  isRouteErrorResponse,
-  Links,
-  Meta,
-  Outlet,
-  Scripts,
-  ScrollRestoration,
-} from "react-router";
+import * as React from "react";
+import { Links, Meta, Outlet, Scripts, ScrollRestoration } from "react-router";
+import "./tailwind.css";
 
-import type { Route } from "./+types/root";
-import "./app.css";
+export function meta() {
+  return [{ charSet: "utf-8" }, { title: "RRRP" }, { name: "viewport", content: "width=device-width, initial-scale=1" }];
+}
 
-export const links: Route.LinksFunction = () => [
-  { rel: "preconnect", href: "https://fonts.googleapis.com" },
-  {
-    rel: "preconnect",
-    href: "https://fonts.gstatic.com",
-    crossOrigin: "anonymous",
-  },
-  {
-    rel: "stylesheet",
-    href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap",
-  },
-];
+export function links() {
+  return [];
+}
 
-export function Layout({ children }: { children: React.ReactNode }) {
+export default function Root() {
   return (
-    <html lang="en">
+    <html lang="th">
       <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
       </head>
-      <body>
-        {children}
+      <body className="min-h-dvh bg-white text-gray-900">
+        <div className="min-h-dvh flex flex-col">
+          <header className="border-b">
+            <div className="container mx-auto px-4 py-3 flex items-center gap-4">
+              <a href="/" className="text-lg font-bold">RRRP</a>
+              <nav className="hidden md:flex gap-4 text-sm">
+                <a href="/">Home</a>
+                <a href="/dashboard">My Dashboard</a>
+                <a href="/profile">Profile</a>
+                <a href="/admin">Admin</a>
+              </nav>
+              <details className="md:hidden ml-auto">
+                <summary className="cursor-pointer select-none">เมนู</summary>
+                <nav className="mt-2 flex flex-col gap-2 text-sm">
+                  <a href="/">Home</a>
+                  <a href="/dashboard">My Dashboard</a>
+                  <a href="/profile">Profile</a>
+                  <a href="/admin">Admin</a>
+                </nav>
+              </details>
+            </div>
+          </header>
+          <main className="flex-1 container mx-auto px-4 py-6">
+            <Outlet />
+          </main>
+          <footer className="border-t py-6 text-center text-sm text-gray-500">© RRRP</footer>
+        </div>
         <ScrollRestoration />
         <Scripts />
       </body>
     </html>
-  );
-}
-
-export default function App() {
-  return <Outlet />;
-}
-
-export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
-  let message = "Oops!";
-  let details = "An unexpected error occurred.";
-  let stack: string | undefined;
-
-  if (isRouteErrorResponse(error)) {
-    message = error.status === 404 ? "404" : "Error";
-    details =
-      error.status === 404
-        ? "The requested page could not be found."
-        : error.statusText || details;
-  } else if (import.meta.env.DEV && error && error instanceof Error) {
-    details = error.message;
-    stack = error.stack;
-  }
-
-  return (
-    <main className="pt-16 p-4 container mx-auto">
-      <h1>{message}</h1>
-      <p>{details}</p>
-      {stack && (
-        <pre className="w-full p-4 overflow-x-auto">
-          <code>{stack}</code>
-        </pre>
-      )}
-    </main>
   );
 }
