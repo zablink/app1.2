@@ -1,11 +1,19 @@
 {
+  "version": 2,
   "builds": [
     {
-      "src": "vite.config.ts",
-      "use": "@vercel/vite"
+      "src": "package.json",
+      "use": "@vercel/static-build"
     }
   ],
+  "scripts": {
+    "build": "vite build"
+  },
+  "env": {
+    "NODE_ENV": "production"
+  },
   "routes": [
-    { "src": "/.*", "dest": "/" }
-  ]
+    { "src": "/.*", "dest": "/index.html" }
+  ],
+  "ignoreCommand": "git diff --quiet HEAD^ HEAD ./"
 }
