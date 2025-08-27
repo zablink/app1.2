@@ -1,5 +1,5 @@
 import type { MetaFunction } from "react-router";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import { filterByProximity } from "~/lib/geo";
 import { rankShops } from "~/lib/rank";
 import { sampleShops } from "~/lib/sampleData";
